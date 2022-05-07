@@ -83,36 +83,46 @@
           <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>View patient list
         </a>
       </li>
+        <li class="nav-item">
+          <a href="{% url 'doctor-appointments' %}" class="nav-link text-white">
+            <i class="fa fa-calendar mr-3 text-primary fa-fw"></i>Appointment Requests
+          </a>
+        </li>
 
       <li class="nav-item">
         <a href="{% url 'add_patient' %}" class="nav-link text-white">
           <i class="fa fa-plus mr-3 text-primary fa-fw"></i>Add patient
         </a>
       </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link text-white">
+          <i class="fas fa-comment-dots mr-3 text-primary fa-fw"></i>Chat
+        </a>
+      </li>
       {% else %}
       <ul class="nav flex-column mb-0">
         <li class="nav-item">
-          <a href="#" class="nav-link text-white">
+          <a href="{% url 'patientInfo' %}" class="nav-link text-white">
             <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>Patient Info
           </a>
         </li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link text-white">
-            <i class="fa fa-plus mr-3 text-primary fa-fw"></i>Appointemnt
+          <a href="{% url 'appointments' %}" class="nav-link text-white">
+            <i class="fa fa-calendar mr-3 text-primary fa-fw"></i>Appointemnt
           </a>
         </li>
 
         <li class="nav-item">
           <a href="#" class="nav-link text-white">
-            <i class="fa fa-plus mr-3 text-primary fa-fw"></i>Chat
+            <i class="fas fa-comment-dots mr-3 text-primary fa-fw"></i>Chat
           </a>
         </li>
         {% endif %}
         {% endif %}
         <li class="nav-item">
-          <a href="{% url 'info' %}" class="nav-link text-white">
-            <i class="fa fa-plus mr-3 text-primary fa-fw"></i>About Us
+          <a href="#" class="nav-link text-white">
+            <i class="fa fa-info mr-3 text-primary fa-fw"></i>About Us
           </a>
         </li>
 

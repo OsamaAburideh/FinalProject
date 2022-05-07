@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %} 
+{% load static %} 
+
+{% block content %}
+    <form class="form" action="" method="post" id="appointmentForm">
+        {% csrf_token %}
+        <div class="container">
+            <div class="patient-form">
+            <div class="row">{{form.as_p}}</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-5 mx-auto">
+            <br />
+            <button class="btn btn-lg btn-success btn-block mx-auto" type="submit">
+                <i class="glyphicon glyphicon-ok-sign"></i> Save
+            </button>
+            </div>
+        </div>
+    </form>
+{% endblock content %}

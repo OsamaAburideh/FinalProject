@@ -90,9 +90,11 @@
 
 						<div class="col-md-5">
 							<h6>Bed number</h6>
-							<label for="bed_num" class="mb-0">
-							<h4>{{patient.bed_num}}</h4>
-							</label>
+							 <select name="bed_num" class="btn btn-bed" id="bed_num">
+                    {% for bed in beds %}
+                        <option value={{ bed }}>{{ bed }}</option>
+                    {% endfor %}
+
 						</div>
 
 						<div class="col-md-6">
