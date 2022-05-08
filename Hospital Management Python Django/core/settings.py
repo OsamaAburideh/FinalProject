@@ -121,3 +121,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
+
+#Activating Django Heroku
+import django_on_heroku
+django_on_heroku.settings(locals())
