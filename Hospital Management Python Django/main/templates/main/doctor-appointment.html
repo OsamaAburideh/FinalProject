@@ -83,4 +83,14 @@
         </table>
 
     </div>
+    <!-- Showing the message  -->
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            let m = "{{ message }}";
+            swal("Perfect !", m, "success");
+        </script>
+        {% endif %}
+    {% endfor %}
 {% endblock content %}

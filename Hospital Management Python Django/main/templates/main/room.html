@@ -2,6 +2,7 @@
 {% comment % } {% include 'main/base.html' %} {% endcomment %}
 <!--fix it to show base-->
 
+{% include 'main/base.html' %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,9 +17,9 @@
     <title>Room</title>
 </head>
 
-<body>
+<body class="page-content p-5 container-fluid" id="content">
 
-    <h2>{{room}} - DjChat</h2>
+    <h2>{{room}} - Chat Room</h2>
 
     <div id="display">
 

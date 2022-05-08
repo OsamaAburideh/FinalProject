@@ -113,6 +113,18 @@ Patient List
 </div>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!-- Showing the message  -->
+{% for message in messages %}
+{% if message.tags == 'success' %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    let m = "{{ message }}";
+    swal("Perfect !", m, "success");
+</script>
+{% endif %}
+{% endfor %}
+
 {% comment %}
 <script>
     $(function () {

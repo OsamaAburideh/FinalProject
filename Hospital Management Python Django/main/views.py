@@ -329,7 +329,9 @@ def appointmentDelete(request, id):
     obj = get_object_or_404(Appointment, id=id)
     if request.method == "POST":
         obj.delete()
+        messages.success(request, "Appointment Deleted Successfully !")
         return HttpResponseRedirect("/doctor-appointments")
+    
 
     return render(request, "main/doctor-appointment.html")
 
@@ -352,7 +354,8 @@ def patientAppointmentDelete(request, id):
 def patientDelete(request, id):
     obj = get_object_or_404(Patient, id=id)
     if request.method == "POST":
-        obj.user.delete()
+        obj.user.delete()        
+        messages.success(request, "Patient Deleted Successfully !")
         return HttpResponseRedirect("/patient_list")
 
     return render(request, "main/patient_list.html")
