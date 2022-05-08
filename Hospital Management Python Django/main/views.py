@@ -93,7 +93,6 @@ def logout(request):
     auth.logout(request)
     return redirect('/')
 
-
 def dashboard(request):
     beds = Bed.objects.all()
     beds_available = Bed.objects.filter(occupied=False).count()
@@ -114,7 +113,7 @@ def dashboard(request):
 
     return render(request, 'main/dashboard.html', context)
 
-
+@login_required(login_url='login')
 def add_patient(request):
     beds = Bed.objects.filter(occupied=False)
     doctors = Doctor.objects.all()
@@ -124,7 +123,6 @@ def add_patient(request):
         patient_relative_name = request.POST['patient_relative_name']
         patient_relative_contact = request.POST['patient_relative_contact']
         address = request.POST['address']
-        #symptoms = request.POST['symptoms']
         prior_ailments = request.POST['prior_ailments']
         bed_num_sent = request.POST['bed_num']
         bed_num = Bed.objects.get(bed_number=bed_num_sent)
@@ -139,7 +137,6 @@ def add_patient(request):
             patient_relative_name=patient_relative_name,
             patient_relative_contact=patient_relative_contact,
             address=address,
-            #symptoms=symptoms,
             prior_ailments=prior_ailments,
             bed_num=bed_num,
             dob=dob,
@@ -198,7 +195,7 @@ def patient_signup(request):
     }
     return render(request, 'main/signup.html', context)
 
-
+@login_required(login_url='login')
 def patient(request, pk):
 
     patient = Patient.objects.get(id=pk)
@@ -240,7 +237,7 @@ def patient(request, pk):
     }
     return render(request, 'main/patient.html', context)
 
-
+@login_required(login_url='login')
 def patient_list(request):
     patients = Patient.objects.all()
 
@@ -291,7 +288,7 @@ def autodoctor(request):
 def info(request):
     return render(request, "main/info.html")
 
-
+@login_required(login_url='login')
 def request_appointment(request):
     appointments = Appointment.objects.filter(
         patient__user__username=request.user.username)
@@ -309,7 +306,6 @@ def request_appointment(request):
     }
 
     return render(request, 'main/appointment.html', context)
-
 
 def approve_appointment(request):
     appointments = Appointment.objects.all()
@@ -337,7 +333,6 @@ def appointmentDelete(request, id):
 
     return render(request, "main/doctor-appointment.html")
 
-
 class AppointmentUpdateView(UpdateView):
     form_class = AppointmentForm
     template_name = 'main/appointmentUpdate.html'
@@ -362,7 +357,7 @@ def patientDelete(request, id):
 
     return render(request, "main/patient_list.html")
 
-
+@login_required(login_url='login')
 def patientInfo(request):
     patient = Patient.objects.get(user=request.user.id)
     if request.method == "POST":
@@ -408,11 +403,11 @@ class ChangePassword(TemplateView):
         context['form'] = form
         return render(self.request, self.template_name, context)
 
-
+@login_required(login_url='login')
 def chat(request):
     return render(request, 'main/chat.html')
 
-
+@login_required(login_url='login')
 def room(request, room):
     username = request.GET.get('username')
     #patient.user = request.GET.get('username')
@@ -423,7 +418,7 @@ def room(request, room):
         'room': room,
         'room_details': room_details
     })
-
+@login_required(login_url='login')
 @csrf_exempt
 def checkview(request):
     room = request.POST['room_name']

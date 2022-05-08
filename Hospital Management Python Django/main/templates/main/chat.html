@@ -1,11 +1,11 @@
 {% load static %}
-{% comment % } {% include 'main/base.html' %} {% endcomment %} <!--fix it to show base-->
-
-
+{% comment % } {% include 'main/base.html' %} {% endcomment %}
+<!--fix it to show base-->
 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'styles/chat.css' %}">
@@ -17,26 +17,22 @@
 
 <body>
 
-<div allign="center">
-    <h2>Django Chat</h2>
-</div>
+    <div allign="center">
+        <h2>Django Chat</h2>
+    </div>
 
 
-<div class="container">
-   
-
-<form id="post-form" method="POST" action="checkview">
-    {% csrf_token %}
-    <label>Please enter Patient Username to access the specified Chat Room</label>
-    <input type="text" name="room_name" id="room_name" width="100px" />
-    <label>Enter your Name</label>
-    <input type="text" name="username" id="username" width="100px" />
-    <input type="submit" value="Enter Room">
-</form>
-</div>
+    <div class="container">
 
 
+        <form id="post-form" method="POST" action="checkview">
+            {% csrf_token %}
+            <label>Please enter Patient Username to access the specified Chat Room</label>
+            <input type="text" name="room_name" id="room_name" width="100px" />
+            <label>Enter your Name</label>
+            <input type="text" name="username" id="username" width="100px" />
+            <input type="submit" value="Enter Room">
+        </form>
+    </div>
 </body>
-
-
 </html>
