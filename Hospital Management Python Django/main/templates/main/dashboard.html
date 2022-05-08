@@ -10,26 +10,76 @@ Dashboard
 {% if request.user.is_staff == True %}
 <div class="container-fluid">
     <!-- Content Row -->
-
-
-    <!-- bed availability -->
-    <div class="col-xl-4 col-md-6 col-sm-12 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-blue text-uppercase mb-1">
-                            Bed availability</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{beds_available}}</div>
+    <div class="row">
+        <!-- bed availability -->
+        <div class="col-xl-4 col-md-6 col-sm-12 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-blue text-uppercase mb-1">
+                                Bed availability</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{beds_available}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-bed fa-2x text-gray-300"></i>
+                        </div>
                     </div>
-                    <div class="col-auto">
-                        <i class="fas fa-bed fa-2x text-gray-300"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6 col-sm-12 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-blue text-uppercase mb-1">
+                                Approved Appointments</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{appointments_approved}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar-check	 fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- pending appointments -->
+        <div class="col-xl-4 col-md-6 col-sm-12 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-blue text-uppercase mb-1">
+                               Pending Appointments</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{appointments_pending}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar-times	 fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- approved appointments -->
+        <div class="col-xl-4 col-md-6 col-sm-12 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Admitted</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ patient_count }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-stethoscope fa-2x text-gray-300"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 
 </div>
 
@@ -38,29 +88,22 @@ Dashboard
 </div>
 <div class="row">
     <!-- .bg-success.grid-box.my-2.mx-2  -->
-    {% comment %} <div class="bg-success grid-box my-2 mx-2 py-3 px-3"> {% endcomment %}
-        {% comment %} </div> {% endcomment %}
-
     {% for bed in beds %}
     <div class="
-                
-                
                 {% if bed.occupied == True %}
                 bg-danger 
                 {% elif bed.occupied == False %}
                 bg-success
                 {% endif %}
-                
-                
                 grid-box my-2 mx-2 py-3 px-3 text-white">{{ bed }}</div>
     {% endfor %}
 
 </div>
-</div>
+
 
 {% elif request.user.is_authenticated == True %}
 <div>
-    <h3 class="font-weight-bold my-3">I am a PATIENT</h3>
+    <h3 class="font-weight-bold my-3">Hello Dear Patient</h3>
 </div>
 
 {% else %}

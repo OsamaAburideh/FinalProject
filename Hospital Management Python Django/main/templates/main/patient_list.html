@@ -1,107 +1,126 @@
 {% extends 'main/base.html' %}
 {% load static %}
- 
-    
 
 {% block contentTitle %}
-    Patient List 
-
+Patient List
 
 {% endblock contentTitle %}
 
 {% block content %}
 
-    {% comment %} 1)name, 2)bed number, 3)status: critical, less crtical, recovering, recovered
-        4)edit option, will display modal that will contain, bed number will change to NA once recovered 
-     {% endcomment %}
 
-    <!-- Topbar Search -->
-    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search mb-3" method="GET" id="list">
-        <div class="input-group">
+<!-- Topbar Search -->
+<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search mb-3" method="GET"
+    id="list">
+    <div class="input-group">
         {{myFilter.form}}
 
-            {% comment %} <input type="text" class="form-control bg-light border-0 small" placeholder="Search patient..." {% endcomment %}
-                {% comment %} id="searchPatient"> {% endcomment %}
-            <div class="input-group-append">
-                <button class="btn btn-primary btn-block" type="submit">
-                    <i class="fas fa-search fa-sm"></i>
-                </button>
-            </div>
+
+        <div class="input-group-append">
+            <button class="btn btn-primary btn-block" type="submit">
+                <i class="fas fa-search fa-sm"></i>
+            </button>
         </div>
-    </form>
-    
-     <div class="table-responsive mt-3">
-        <table class="table table-hover">
-            <thead>
-                <th><h3>Name</h3></th>
-               <!-- <th><h3>Doctor</h3></th>  note-->
-                <th><h3>Bed no</h3></th>
-                <th><h3>Status</h3></th>
-                <th><h3>Edit</h3></th>
-                <th><h3>Delete</h3></th>
-            </thead>
+    </div>
+</form>
 
-            <tbody>
-                {% for patient in patients %}
+<div class="table-responsive mt-3">
+    <table class="table table-hover">
+        <thead>
+            <th>
+                <h3>Name</h3>
+            </th>
+            <th>
+                <h3>Username</h3>
+            </th>
+            <th>
+                <h3>Doctor</h3>
+            </th>
+            <th>
+                <h3>Bed no</h3>
+            </th>
+            <!--<th><h3>Status</h3></th>-->
+            <th>
+                <h3>Edit</h3>
+            </th>
+            <th>
+                <h3>Delete</h3>
+            </th>
+        </thead>
 
-                <tr class="mx-auto">
-                    <td scope="row"><h5>{{ patient.name }}</h5></td>
-                   <!-- <td><h5>{{ patient.doctor }}</h5></td> -->
-                    <td><h5>{{ patient.bed_num }}</h5></td>
-                    <td><h5>{{ patient.status }}</h5></td>
-                    <td><a href="/patient/{{patient.id}}" class="btn btn-purple"><h5>Update</h5></a></td>
-                    <td>
-                        {% comment %} <a href="/patientDelete/{{patient.id}}" class="btn btn-purple"><h5>Remove</h5></a>{% endcomment %}
-                        <button type="button" data-toggle="modal" data-target="#modalID{{ forloop.counter }}" class="btn btn-purple">Delete</button>
-                        <!--Modal-->
-                        <div id="modalID{{ forloop.counter }}" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">
-                                            {{ model_name }}
-                                        </h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Are you sure you want to delete?</p>
-                                        <div class="form-inline">
-                                            <div class="modal-footer" style="border-top: none;">
-                                                <button type="button" class="btn btn-default"
-                                                        data-dismiss="modal">Cancel
+        <tbody>
+            {% for patient in patients %}
+
+            <tr class="mx-auto">
+                <td scope="row">
+                    <h5>{{ patient.name }}</h5>
+                </td>
+                <td>
+                    <h5>{{ patient.doctor }}</h5>
+                </td>
+                <td>
+                    <h5>{{ patient.user }}</h5>
+                </td>
+                <td>
+                    <h5>{{ patient.bed_num }}</h5>
+                </td>
+                <!--<td>
+                    <h5>{{ patient.status }}</h5>
+                </td>-->
+                <td><a href="/patient/{{patient.id}}" class="btn btn-purple">
+                        <h5>Update</h5>
+                    </a></td>
+                <td>
+
+                    <button type="button" data-toggle="modal" data-target="#modalID{{ forloop.counter }}"
+                        class="btn btn-danger">Delete</button>
+                    <!--Modal-->
+                    <div id="modalID{{ forloop.counter }}" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">
+                                        {{ model_name }}
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are you sure you want to delete?</p>
+                                    <div class="form-inline">
+                                        <div class="modal-footer" style="border-top: none;">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
+                                            </button>
+
+                                            <form action="/patientDelete/{{patient.id}}" method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-danger">
+                                                    Delete
                                                 </button>
-                                            
-                                                <form  action="/patientDelete/{{patient.id}}"
-                                                        method="post">
-                                                    {% csrf_token %}
-                                                    <button type="submit"
-                                                            class="btn delBtn">
-                                                        Delete
-                                                    </button>
-                                                </form>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </td>
-                </tr>
-    
-                {% endfor %}
-                
-            </tbody>
-        </table>
-    
-    </div>
+                    </div>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+</div>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-{% comment %} <script> 
-    $( function() {
-    
-    $( "#searchPatient" ).autocomplete({
-      source: '{% url "autocomplete" %}'
+{% comment %}
+<script>
+    $(function () {
+
+        $("#searchPatient").autocomplete({
+            source: '{% url "autocomplete" %}'
+        });
     });
-  } );
 </script>
 {% endcomment %}
 {% endblock content %}

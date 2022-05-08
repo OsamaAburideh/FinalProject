@@ -26,9 +26,7 @@
   <!-- jquery autocomplete css -->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-  {% comment %}
-  <link rel="stylesheet" href="{% static 'styles/patient.css' %}"> {% endcomment %}
-
+  
   <!-- google api font -->
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
     type="text/css">
@@ -36,7 +34,7 @@
   <!-- .autocomplete -->
   <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <title>{% block title %} AppName {% endblock %}</title>
+  <title>{% block title %} Clinical Management System {% endblock %}</title>
 </head>
 
 <body>
@@ -66,7 +64,7 @@
 
     <!-- greeting -->
     <p class="text-white font-weight-bold px-3 pb-4 mb-0">
-      Hello {{user.first_name}}
+      Hello {{user.username}}
     </p>
 
     <!-- refirect dashboard -->
@@ -95,7 +93,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link text-white">
+        <a href="{% url 'chat' %}" class="nav-link text-white">
           <i class="fas fa-comment-dots mr-3 text-primary fa-fw"></i>Chat
         </a>
       </li>
@@ -114,12 +112,12 @@
         </li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link text-white">
+          <a href="{% url 'chat' %}" class="nav-link text-white">
             <i class="fas fa-comment-dots mr-3 text-primary fa-fw"></i>Chat
           </a>
         </li>
         {% endif %}
-        {% endif %}
+        {% endif %}        
         <li class="nav-item">
           <a href="#" class="nav-link text-white">
             <i class="fa fa-info mr-3 text-primary fa-fw"></i>About Us

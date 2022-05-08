@@ -42,8 +42,7 @@
                     {% endif %}
                     <td><a href="/appointmentUpdate/{{app.id}}" class="btn btn-purple"><h5>Update</h5></a></td>
                     <td>
-                        {% comment %} <a href="/patientDelete/{{patient.id}}" class="btn btn-purple"><h5>Remove</h5></a>{% endcomment %}
-                        <button type="button" data-toggle="modal" data-target="#modalID{{ forloop.counter }}" class="btn btn-purple">Delete</button>
+                        <button type="button" data-toggle="modal" data-target="#modalID{{ forloop.counter }}" class="btn btn-danger">Delete</button>
                         <!--Modal-->
                         <div id="modalID{{ forloop.counter }}" class="modal fade" role="dialog">
                             <div class="modal-dialog">
@@ -65,7 +64,7 @@
                                                         method="post">
                                                     {% csrf_token %}
                                                     <button type="submit"
-                                                            class="btn delBtn">
+                                                            class="btn btn-danger">
                                                         Delete
                                                     </button>
                                                 </form>

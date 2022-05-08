@@ -24,13 +24,13 @@
             <div class="col-md-4 form-field mt-4 mb-0">
                <label for="mobile">
                   <h6>Patient's contact number</h6>
-                  <input type="text" id="name" class="input-text" type="text" name="mobile" placeholder="Mobile No" value="{{patient.phone_num}}">
+                  <input type="text" id="name" class="input-text" type="text" name="mobile" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" placeholder="Mobile No" value="{{patient.phone_num}}">
                </label>
             </div>
             <div class="offset-md-2 col-md-4 form-field mt-4 mb-0">
                <label for="mobile" class="mb-0">
                   <h6>Relative's contact</h6>
-                  <input type="text" id="mobile2" class="input-text" type="text" name="relativeContact" placeholder="Mobile No" value="{{patient.patient_relative_contact}}">
+                  <input type="text" id="mobile2" class="input-text" type="text" name="relativeContact" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" placeholder="Mobile No" value="{{patient.patient_relative_contact}}">
                </label>
             </div>
             <div class="form-field mt-4">
@@ -71,7 +71,7 @@
       </div>
       <div class="col-md-5 mx-auto">
          <br />
-         <a href={% url 'update_password' %} class="btn btn-lg btn-success btn-block mx-auto" type="submit">
+         <a href="{% url 'update_password' %}" class="btn btn-lg btn-success btn-block mx-auto" type="submit">
          <i class="glyphicon glyphicon-ok-sign"></i> Update Password
          </a>
       </div>

@@ -129,12 +129,6 @@ border-left: 0.25rem solid #f6c23e !important;
     border-bottom: 2px solid #4e73df;
 }
 
-#id_status{
-    margin-right: 0.5rem;
-    border: none;
-    outline: none;
-    border-bottom: 2px solid #4e73df;
-}
 
 #id_doctor{
     margin-right: 0.5rem;
@@ -190,43 +184,6 @@ border-left: 0.25rem solid #f6c23e !important;
     cursor: pointer;
 }
 
-.symptoms-label{
-    margin: 50px 0 0px 0;
-    font-size: 23px;
-    line-height: 1em;
-    font-weight: 400;
-    color: #5543ca;
-    cursor: text;
-}
-
-.symptoms{
-    margin: 0px 0;
-}
-
-.symptoms .symptom-type{
-    margin: 20px 0;
-    font-size: 20px;
-    font-weight: 300;
-    color: #5543ca;
-    cursor: text;
-}
-
-.symptoms .symptom{
-    display: flex;
-    align-items: center;
-    justify-content: start;
-}
-
-.symptoms .symptom > input{
-    width: 20px;
-    height: 20px;
-    margin: 10px 10px;
-}
-
-.symptoms .symptom > label{
-    margin: 10px 0;
-    text-align: center;
-}
 
 /* -------------- */
 /* grid box style */

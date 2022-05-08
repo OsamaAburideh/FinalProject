@@ -41,7 +41,7 @@
                     <td><h5>{{ app.doctor }}</h5></td>
                     <td><h5>{{ app.description }}</h5></td>                    
                     <td>                        
-                        <button type="button" data-toggle="modal" data-target="#modalID{{ forloop.counter }}" class="btn btn-purple">Delete</button>
+                        <button type="button" data-toggle="modal" data-target="#modalID{{ forloop.counter }}" class="btn btn-danger">Delete</button>
                         <!--Modal-->
                         <div id="modalID{{ forloop.counter }}" class="modal fade" role="dialog">
                             <div class="modal-dialog">
@@ -63,7 +63,7 @@
                                                         method="post">
                                                     {% csrf_token %}
                                                     <button type="submit"
-                                                            class="btn delBtn">
+                                                            class="btn btn-danger">
                                                         Delete
                                                     </button>
                                                 </form>

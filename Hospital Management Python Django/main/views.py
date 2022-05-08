@@ -18,7 +18,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-
+from django.views.decorators.csrf import csrf_exempt
 # PatientFilter = OrderFilter
 
 
@@ -95,13 +95,20 @@ def logout(request):
 
 
 def dashboard(request):
-    patients = Patient.objects.all()
     beds = Bed.objects.all()
     beds_available = Bed.objects.filter(occupied=False).count()
+    patients = Patient.objects.all()
+    patient_count = patients.count()
+    appointments = Appointment.objects.all()
+    appointments_approved = Appointment.objects.filter(approved = True).count
+    appointments_pending = Appointment.objects.filter(approved = False).count
+
+
     context = {
-
+        'appointments_approved': appointments_approved,
+        'appointments_pending': appointments_pending,
         'beds_available': beds_available,
-
+        'patient_count': patient_count,
         'beds': beds
     }
 
@@ -117,7 +124,7 @@ def add_patient(request):
         patient_relative_name = request.POST['patient_relative_name']
         patient_relative_contact = request.POST['patient_relative_contact']
         address = request.POST['address']
-        symptoms = request.POST['symptoms']
+        #symptoms = request.POST['symptoms']
         prior_ailments = request.POST['prior_ailments']
         bed_num_sent = request.POST['bed_num']
         bed_num = Bed.objects.get(bed_number=bed_num_sent)
@@ -132,7 +139,7 @@ def add_patient(request):
             patient_relative_name=patient_relative_name,
             patient_relative_contact=patient_relative_contact,
             address=address,
-            symptoms=symptoms,
+            #symptoms=symptoms,
             prior_ailments=prior_ailments,
             bed_num=bed_num,
             dob=dob,
@@ -164,9 +171,9 @@ def patient_signup(request):
         patient_relative_name = request.POST['patient_relative_name']
         patient_relative_contact = request.POST['patient_relative_contact']
         address = request.POST['address']
-        dob = ""
-        doctor = ""
-        doctor = ""
+        #dob = ""
+        #doctor = ""
+        #doctor = ""
         print(request.POST)
         if password == confirm_password:
             user = User.objects.get_or_create(
@@ -285,10 +292,6 @@ def info(request):
     return render(request, "main/info.html")
 
 
-def index(request):
-    return render(request, "main/index.html")
-
-
 def request_appointment(request):
     appointments = Appointment.objects.filter(
         patient__user__username=request.user.username)
@@ -404,3 +407,46 @@ class ChangePassword(TemplateView):
             return redirect(reverse('dashboard'))
         context['form'] = form
         return render(self.request, self.template_name, context)
+
+
+def chat(request):
+    return render(request, 'main/chat.html')
+
+
+def room(request, room):
+    username = request.GET.get('username')
+    #patient.user = request.GET.get('username')
+    #Doctor.user  = request.GET.get('username')
+    room_details = Room.objects.get(name=room)
+    return render(request, 'main/room.html', {
+        'username': username,
+        'room': room,
+        'room_details': room_details
+    })
+
+@csrf_exempt
+def checkview(request):
+    room = request.POST['room_name']
+    username = request.POST['username']
+
+    if Room.objects.filter(name=room).exists():
+        return redirect('/'+room+'/?username='+username)
+    else:
+        new_room = Room.objects.create(name=room)
+        new_room.save()
+        return redirect('/'+room+'/?username='+username)
+
+def send(request):
+    message = request.POST['message']
+    username = request.POST['username']
+    room_id = request.POST['room_id']
+
+    new_message = Message.objects.create(value=message, user=username, room=room_id)
+    new_message.save()
+    return HttpResponse('Message sent successfully')
+
+def getMessages(request, room):
+    room_details = Room.objects.get(name=room)
+
+    messages = Message.objects.filter(room=room_details.id)
+    return JsonResponse({"messages":list(messages.values())})
